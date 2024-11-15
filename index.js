@@ -2,6 +2,9 @@ const axios = require('axios');
 const express = require('express');
 const app = express();
 const PORT = 3000;
+app.use(cors());
+app.use(express.json());
+
 
 app.post('/dev-search-contact', async (req, res) => {
     try {
