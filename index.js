@@ -27,7 +27,6 @@ app.get('/dev-fetch-contact-details', async (req, res) => {
 });
 
 app.post('/dev-search-contacts', async (req, res) => {
-
     try {
         const response = await axios.post('https://landing.shalommediastore.org/_hcms/api/accounts/search/contact', req.body, {
             headers: {
@@ -42,6 +41,35 @@ app.post('/dev-search-contacts', async (req, res) => {
     }
 });
 
+app.post('/dev-create-contact', async (req, res) => {
+    try {
+        const response = await axios.post('https://landing.shalommediastore.org/_hcms/api/accounts/create/contact', req.body, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + process.env.API_KEY
+            },
+        });
+        res.send(response.data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to create contact' });
+    }
+});
+
+app.post('/dev-create-recurring-plan', async (req, res) => {
+    try {
+        const response = await axios.post('https://landing.shalommediastore.org/_hcms/api/accounts/create/reccuring-plan', req.body, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + process.env.API_KEY
+            },
+        });
+        res.send(response.data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to create recurring plan' });
+    }
+});
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
