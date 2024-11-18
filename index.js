@@ -71,6 +71,21 @@ app.post('/dev-create-recurring-plan', async (req, res) => {
     }
 });
 
+app.patch('/dev-update-recurring-plan', async (req, res) => {
+    try {
+        const response = await axios.patch('https://landing.shalommediastore.org/_hcms/api/accounts/update/recurring-plan', req.body, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + process.env.API_KEY
+            },
+        });
+        res.send(response.data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to update contact' });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
