@@ -118,6 +118,21 @@ app.get('/dev-fetch-recurring-plans', async (req, res) => {
     }
 });
 
+app.post('/dev-create-deal', async (req, res) => {
+    try {
+        const response = await axios.post('https://landing.shalommediastore.org/_hcms/api/accounts/create/deal', req.body, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + process.env.API_KEY
+            },
+        });
+        res.send(response.data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to create deal' });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
