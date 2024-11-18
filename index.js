@@ -1,29 +1,23 @@
 const axios = require('axios');
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config();
 const app = express();
 const PORT = 3000;
 app.use(cors());
-app.use(express.json());
 
 
-app.post('/dev-search-contact', async (req, res) => {
+app.get('/dev-fetch-contact-details', async (req, res) => {
     try {
-        const response = await axios.post('https://landing.shalommediastore.org/_hcms/api/accounts/search/contact', req.body);
-        res.json(response.data);
-        console.log(response.data);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Failed to search contact' });
-    }
-});
-
-
-
-app.get('/dev-fetch-contact-details', (req, res) => {
-    try {
-        const response = axios.get('https://landing.shalommediastore.org/_hcms/api/accounts/search/contact');
-        res.json(response.data);
+        const contactId = req.query.contactId;
+        console.log(contactId);
+        const response = await axios.get(`https://landing.shalommediastore.org/_hcms/api/accounts/fetch/contact?contactId=${contactId}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + process.env.API_KEY
+            },
+        });
+        res.send(response.data);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Failed to fetch contact details' });
