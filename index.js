@@ -101,6 +101,23 @@ app.post('/dev-create-association', async (req, res) => {
     }    
 });
 
+
+app.get('/dev-fetch-recurring-plans', async (req, res) => {
+    const pagination = req.query.pagination;
+    try {
+        const response = await axios.get(`https://landing.shalommediastore.org/_hcms/api/accounts/fetch/recurring-plans?pagination=${pagination}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + process.env.API_KEY
+            },
+        });
+        res.send(response.data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to fetch recurring plans' });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
