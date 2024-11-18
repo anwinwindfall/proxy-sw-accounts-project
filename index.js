@@ -86,6 +86,21 @@ app.patch('/dev-update-recurring-plan', async (req, res) => {
     }
 });
 
+app.post('/dev-create-association', async (req, res) => {
+    try {
+        const response = await axios.post('https://landing.shalommediastore.org/_hcms/api/accounts/associate/reccuringToContact', req.body, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + process.env.API_KEY
+            },
+        });
+        res.send(response.data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to create association' });
+    }    
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
