@@ -9,6 +9,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors())
 app.use(bodyParser.json())
 
+app.use(cors({
+    origin: '*', // Replace with your frontend URL
+    methods: ['GET', 'POST', 'PATCH'], // Specify allowed HTTP methods
+}));
+
 app.get('/dev-fetch-contact-details', async (req, res) => {
     try {
         const contactId = req.query.contactId;
