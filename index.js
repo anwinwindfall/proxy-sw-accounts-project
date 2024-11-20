@@ -76,7 +76,7 @@ app.post('/dev-create-recurring-plan', async (req, res) => {
     }
 });
 
-app.patch('/dev-update-recurring-plan', async (req, res) => {
+app.post('/dev-update-recurring-plan', async (req, res) => {
     try {
         const response = await axios.patch('https://landing.shalommediastore.org/_hcms/api/accounts/update/recurring-plan', req.body, {
             headers: {
