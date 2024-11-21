@@ -56,8 +56,7 @@ app.post('/dev-create-contact', async (req, res) => {
         });
         res.send(response.data);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Failed to create contact' });
+        res.send(error);
     }
 });
 
