@@ -1,7 +1,8 @@
 const axios = require('axios');
 const express = require('express');
 const cors = require('cors');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+const e = require('express');
 require('dotenv').config();
 const app = express();
 const PORT = 3000;
@@ -56,7 +57,13 @@ app.post('/dev-create-contact', async (req, res) => {
         });
         res.send(response.data);
     } catch (error) {
-        res.send(error);
+        if (error.status === 409) {
+            res.status
+        }
+        else {
+            console.error(error);
+            res.status(500).json({ error: 'Failed to create contact' });
+        }
     }
 });
 
