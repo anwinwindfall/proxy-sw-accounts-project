@@ -58,7 +58,7 @@ app.post('/dev-create-contact', async (req, res) => {
         res.send(response.data);
     } catch (error) {
         if (error.status === 409) {
-            res.status
+            res.status(409).json({ error: 'Contact already exists' });
         }
         else {
             console.error(error);
