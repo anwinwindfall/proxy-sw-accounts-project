@@ -118,8 +118,17 @@ app.get('/dev-fetch-recurring-plans', async (req, res) => {
     const fromDate = req.query.fromDate;
     const toDate = req.query.toDate;
     const paymentMethod = req.query.paymentMethod
+    const filters = {}
+
+    if(pagination) filters.pagination = pagination;
+    if(fromDate) filters.fromDate = fromDate;
+    if(toDate) filters.toDate = toDate;
+    if(paymentMethod) filters.paymentMethod = paymentMethod;
+
+    const filterString = Object.keys(filters).map(key => `${key}=${filters[key]}`).join('&');
+
     try {
-        const response = await axios.get(`https://landing.shalommediastore.org/_hcms/api/accounts/fetch/recurring-plans?pagination=${pagination}&fromDate=${fromDate}&toDate=${toDate}&paymentMethod=${paymentMethod}`, {
+        const response = await axios.get(`https://landing.shalommediastore.org/_hcms/api/accounts/fetch/recurring-plans?${filterString}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + process.env.API_KEY
