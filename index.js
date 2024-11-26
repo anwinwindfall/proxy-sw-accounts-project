@@ -115,8 +115,11 @@ app.post('/dev-create-association', async (req, res) => {
 
 app.get('/dev-fetch-recurring-plans', async (req, res) => {
     const pagination = req.query.pagination;
+    const fromDate = req.query.fromDate;
+    const toDate = req.query.toDate;
+    const paymentMethod = req.query.paymentMethod
     try {
-        const response = await axios.get(`https://landing.shalommediastore.org/_hcms/api/accounts/fetch/recurring-plans?pagination=${pagination}`, {
+        const response = await axios.get(`https://landing.shalommediastore.org/_hcms/api/accounts/fetch/recurring-plans?pagination=${pagination}&${fromDate}&${toDate}&${paymentMethod}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + process.env.API_KEY
