@@ -119,7 +119,7 @@ app.get('/dev-fetch-recurring-plans', async (req, res) => {
     const toDate = req.query.toDate;
     const paymentMethod = req.query.paymentMethod
     try {
-        const response = await axios.get(`https://landing.shalommediastore.org/_hcms/api/accounts/fetch/recurring-plans?pagination=${pagination}&${fromDate}&${toDate}&${paymentMethod}`, {
+        const response = await axios.get(`https://landing.shalommediastore.org/_hcms/api/accounts/fetch/recurring-plans?pagination=${pagination}&fromDate=${fromDate}&toDate=${toDate}&paymentMethod${paymentMethod}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + process.env.API_KEY
