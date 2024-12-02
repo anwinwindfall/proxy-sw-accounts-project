@@ -2,7 +2,6 @@ const axios = require('axios');
 const express = require('express');
 const cors = require('cors');
 var bodyParser = require('body-parser');
-const e = require('express');
 require('dotenv').config();
 const app = express();
 const PORT = 3000;
@@ -156,7 +155,7 @@ app.post('/dev-create-deal', async (req, res) => {
     }
 });
 
-app.patch('/dev-update-contact', async (req, res) => {
+app.post('/dev-update-contact', async (req, res) => {
     try {
         const response = await axios.patch('https://landing.shalommediastore.org/_hcms/api/accounts/update/contact', req.body, {
             headers: {
