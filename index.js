@@ -11,7 +11,7 @@ var options = {
     "origin": "*",
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
     "preflightContinue": false,
-    "optionsSuccessStatus": 204
+    "optionsSuccessStatus": 200
   }
 app.use(cors(options))
 app.use(bodyParser.json())
