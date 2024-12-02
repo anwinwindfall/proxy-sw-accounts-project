@@ -15,12 +15,6 @@ var options = {
   }
 app.use(cors(options))
 app.use(bodyParser.json())
-
-app.use(cors({
-    origin: '*', 
-    methods: ['GET', 'POST', 'PATCH', 'OPTIONS'],
-}));
-
 app.get('/dev-fetch-contact-details', async (req, res) => {
     try {
         const contactId = req.query.contactId;
